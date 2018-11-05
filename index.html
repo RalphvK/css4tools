@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>CSS4 HEX - RGBA Converter</title>
+
+    <!-- favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="img/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="img/favicon/favicon-16x16.png">
+    <link rel="manifest" href="img/favicon/site.webmanifest">
+    <link rel="mask-icon" href="img/favicon/safari-pinned-tab.svg" color="#0000ff">
+    <link rel="shortcut icon" href="img/favicon/favicon.ico">
+    <meta name="msapplication-TileColor" content="#2b5797">
+    <meta name="msapplication-config" content="img/favicon/browserconfig.xml">
+    <meta name="theme-color" content="#0000ff">    
+
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link type="text/css" rel="stylesheet" href="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.css"/>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800" rel="stylesheet"> 
+    
+    <!-- custom CSS -->
+    <link rel="stylesheet" type="text/css" href="css/animate.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+
+</head>
+<body>
+
+    <!-- app window -->
+    <div id="app" v-cloak>
+        <div class="container">
+
+            <!-- input row -->
+            <div id="row-input" class="row">
+                <div class="col">
+                    <form>
+                        <div class="form-group animated fadeInDown">
+                            <b-input-group prepend="HEX">
+                                <b-form-input v-model="hex" type="text" size="lg" @focus.native="hex_active = true" @blur.native="hex_active = false"></b-form-input>
+                            </b-input-group>
+                        </div>
+                        <div class="form-group animated fadeInDown" style="animation-delay: 0.1s;">
+                            <b-input-group prepend="RGB">
+                                <b-form-input v-model="rgb" type="text" size="lg" @focus.native="rgb_active = true" @blur.native="rgb_active = false"></b-form-input>
+                            </b-input-group>
+                        </div>
+                    </form>                
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- javascript -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/babel-polyfill@latest/dist/polyfill.min.js"></script>
+    <script src="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.js"></script>
+    <script src="js/colorCode.min.js"></script>
+    <script>
+
+        // Vue app
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                color: new colorCode().parseHex('#00f9'),
+                hex_active: false,
+                rgb_active: false,
+                hex_input: '',
+                rgb_input: ''
+            },
+            computed: {
+                hex: {
+                    get() {
+                        if (!this.hex_active) {
+                            return this.color.hex();
+                        } else {
+                            return this.hex_input;
+                        }
+                    },
+                    set(value) {
+                        this.color.hex(value);
+                        if (!this.hex_active) {
+                            this.hex_input = this.color.hex();
+                        } else {
+                            this.hex_input = value;
+                        }
+                    }
+                },
+                rgb: {
+                    get() {
+                        if (!this.rgb_active) {
+                            return this.color.rgb();
+                        } else {
+                            return this.rgb_input;
+                        }
+                    },
+                    set(value) {
+                        this.color.rgb(value);
+                        if (!this.rgb_active) {
+                            this.rgb_input = this.color.rgb();
+                        } else {
+                            this.rgb_input = value;
+                        }
+                    }
+                }
+            },
+            watch: {
+                color: {
+                    handler(object) {
+                        this.logChannels();
+                        this.setBackgroundColor('body', this.color.hex());
+                        setThemeColor(this.color.hex());
+                    },
+                    deep: true
+                }
+            },
+            methods: {
+                init() {
+                    this.hex_input = this.color.hex();
+                    this.rgb_input = this.color.rgb();
+                    this.setBackgroundColor('body', this.color.hex());
+                },
+                setBackgroundColor(selector, value) {
+                    document.querySelector(selector).style.backgroundColor = value;
+                },
+                logChannels() {
+                    return { red: this.color.red, green: this.color.green, blue: this.color.blue, alpha: this.color.alpha };
+                }
+            }
+        });
+
+        vm.init();
+
+        function setThemeColor(color) {
+            var metaThemeColor = document.querySelector("meta[name=theme-color]");
+            metaThemeColor.setAttribute("content", color);
+        }
+    </script>
+
+</body>
+</html>
