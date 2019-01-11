@@ -48,7 +48,7 @@ const hex_rgb = {
         color: {
             handler(object) {
                 this.logChannels();
-                this.setBackgroundColor('body', this.color.hex());
+                this.setBackground('body', this.color.hex());
                 setThemeColor(this.color.hex());
             },
             deep: true
@@ -58,10 +58,10 @@ const hex_rgb = {
         init() {
             this.hex_input = this.color.hex();
             this.rgb_input = this.color.rgb();
-            this.setBackgroundColor('body', this.color.hex());
+            this.setBackground('body', this.color.hex());
         },
-        setBackgroundColor(selector, value) {
-            document.querySelector(selector).style.backgroundColor = value;
+        setBackground(selector, value) {
+            document.querySelector(selector).style.background = value;
         },
         logChannels() {
             return { red: this.color.red, green: this.color.green, blue: this.color.blue, alpha: this.color.alpha };

@@ -10,24 +10,31 @@ const scss = {
         baseColor: {
             handler(object) {
                 // compare colors
-                this.updateScss();
+                this.update();
             }
         },
         variantColor: {
             handler(object) {
                 // compare colors
-                this.updateScss();
+                this.update();
             }
         }
     },
     methods: {
         init() {
-            this.updateScss();
+            this.update();
         },
-        updateScss() {
+        update() {
+            // create color objects
             var bc = new colorCode(this.baseColor);
             var vc = new colorCode(this.variantColor);
+            // set background color
+            this.setBackground('body', bc.hex(), vc.hex());
+            // set new scss
             return this.scss = bc.scssTransformTo(vc);
+        },
+        setBackground(selector, colorA, colorB) {
+            document.querySelector(selector).style.background = `linear-gradient(to right, ${colorA} 50%, ${colorB} 50%)`;
         }
     },
     mounted() {

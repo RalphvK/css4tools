@@ -6646,7 +6646,7 @@ body {
   font-weight: 400;
   color: #111;
   background-color: #00f;
-  transition: background-color 0.5s ease; }
+  transition: background-color 0.5s ease, background-image 0.5s ease; }
 
 /* general classes */
 [v-cloak] {

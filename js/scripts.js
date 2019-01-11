@@ -395,7 +395,7 @@ const hex_rgb = {
         color: {
             handler(object) {
                 this.logChannels();
-                this.setBackgroundColor('body', this.color.hex());
+                this.setBackground('body', this.color.hex());
                 setThemeColor(this.color.hex());
             },
             deep: true
@@ -405,10 +405,10 @@ const hex_rgb = {
         init() {
             this.hex_input = this.color.hex();
             this.rgb_input = this.color.rgb();
-            this.setBackgroundColor('body', this.color.hex());
+            this.setBackground('body', this.color.hex());
         },
-        setBackgroundColor(selector, value) {
-            document.querySelector(selector).style.backgroundColor = value;
+        setBackground(selector, value) {
+            document.querySelector(selector).style.background = value;
         },
         logChannels() {
             return { red: this.color.red, green: this.color.green, blue: this.color.blue, alpha: this.color.alpha };
@@ -453,24 +453,31 @@ const scss = {
         baseColor: {
             handler(object) {
                 // compare colors
-                this.updateScss();
+                this.update();
             }
         },
         variantColor: {
             handler(object) {
                 // compare colors
-                this.updateScss();
+                this.update();
             }
         }
     },
     methods: {
         init() {
-            this.updateScss();
+            this.update();
         },
-        updateScss() {
+        update() {
+            // create color objects
             var bc = new colorCode(this.baseColor);
             var vc = new colorCode(this.variantColor);
+            // set background color
+            this.setBackground('body', bc.hex(), vc.hex());
+            // set new scss
             return this.scss = bc.scssTransformTo(vc);
+        },
+        setBackground(selector, colorA, colorB) {
+            document.querySelector(selector).style.background = `linear-gradient(to right, ${colorA} 50%, ${colorB} 50%)`;
         }
     },
     mounted() {
