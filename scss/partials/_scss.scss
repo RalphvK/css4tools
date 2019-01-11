@@ -1,0 +1,14 @@
+#row-input {
+    .form-group.code {
+        color: $white;
+
+        textarea {
+            border-radius: 23px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1em;
+            background-color: rgba($black, 0.2);
+            border: none;
+            color: $white;
+        }
+    }
+}

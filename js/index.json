@@ -1,6 +1,6 @@
 {
     "includes": [
-        "./js/partials/colorCode.min.js",
+        "./js/partials/colorCode.js",
         "./js/partials/modules/*.js",
         "./js/partials/**/*.js"
     ]
