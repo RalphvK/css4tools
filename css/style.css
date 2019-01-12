@@ -6507,7 +6507,8 @@ a.text-dark:hover, a.text-dark:focus {
     display: inline-block;
     margin-bottom: -25px; }
     .navbar .logo .cls-primary {
-      fill: #ffffff; }
+      fill: #ffffff;
+      transition: fill 0.5s ease; }
 
 ul.menu {
   margin-left: auto;
@@ -6550,11 +6551,11 @@ ul.menu {
 button.hamburger {
   display: none; }
 
-.component-scss .navbar .logo .cls-primary {
+.inverse .navbar .logo .cls-primary {
   fill: #343a40; }
-.component-scss ul.menu li a {
+.inverse ul.menu li a {
   color: #343a40; }
-  .component-scss ul.menu li a:hover:after, .component-scss ul.menu li a.active:after {
+  .inverse ul.menu li a:hover:after, .inverse ul.menu li a.active:after {
     border-bottom-color: #343a40; }
 
 /*!

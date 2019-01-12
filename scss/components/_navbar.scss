@@ -67,7 +67,8 @@ $logo: (
         margin-bottom: -25px;
 
         .cls-primary {
-            fill: map-get($nav-item, 'color');;
+            fill: map-get($nav-item, 'color');
+            transition: fill 0.5s ease;
         }
     }
     
@@ -120,7 +121,7 @@ button.hamburger {
     display: none;
 }
 
-.component-scss {
+.inverse {
     .navbar {
         .logo {
             .cls-primary {
