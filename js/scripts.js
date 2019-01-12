@@ -498,7 +498,7 @@ const scss = {
             this.baseColorDisplay = bc.hex();
             this.variantColorDisplay = vc.hex();
             // set new scss
-            return this.scss = bc.scssTransformTo(vc);
+            return this.scss = '$color: ' + this.baseColorDisplay + ';\n$variant: ' + bc.scssTransformTo(vc, '$color');
         },
         setBackground(selector, value) {
             document.querySelector(selector).style.background = value;
