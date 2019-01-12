@@ -1,0 +1,148 @@
+$nav-item: (
+    'padding-x': 30px,
+    'padding-y': 0,
+    'border-radius': 999px,
+    'color': $white,
+    'inverse-color': $gray-800
+);
+
+$logo: (
+    'height': 55px,
+    'padding': 0 10px
+);
+
+@mixin navbar_underline(){
+    text-decoration: underline;
+}
+
+@mixin navbar_underline_border(
+    $color: map-get($nav-item, 'color'),
+    $thickness: 2px,
+    ){
+
+    text-decoration: none;
+    position: relative;
+    
+    &:after {
+        content: '';
+        width: calc(100% - #{map-get($nav-item, 'padding-x') * 2});
+        position: absolute;
+        left: map-get($nav-item, 'padding-x');
+        bottom: 0px;
+        border-bottom: $thickness solid $color;
+    }
+
+}
+
+@mixin navbar_underline_inset(
+    $color: map-get($nav-item, 'color'),
+    $thickness: 2px,
+    ){
+
+    text-decoration: none;
+    position: relative;
+    
+    &:after {
+        content: '';
+        width: calc(100% - #{map-get($nav-item, 'padding-x') * 2});
+        position: absolute;
+        left: map-get($nav-item, 'padding-x');
+        bottom: 0px;
+        border-top: $thickness solid $color;
+    }
+
+}
+
+.navbar {
+    width: 100%;
+    display: flex;
+    line-height: 70px;
+    align-items: center;
+    padding: 10px 30px 80px 30px;
+
+    .logo {
+        padding: map-get($logo, 'padding');
+        height: map-get($logo, 'height');
+        display: inline-block;
+        margin-bottom: -25px;
+
+        .cls-primary {
+            fill: map-get($nav-item, 'color');;
+        }
+    }
+    
+}
+
+ul.menu {
+    margin-left: auto;
+    margin-bottom: 0;
+    
+    li {
+        display: inline-block;
+        list-style: none;
+
+        a {
+            display: block;
+            padding: map-get($nav-item, 'padding-y') map-get($nav-item, 'padding-x');
+            font-weight: 600;
+            color: map-get($nav-item, 'color');
+            text-transform: uppercase;
+            font-size: 0.8em;
+            letter-spacing: 1px;
+            border-radius: map-get($nav-item, 'border-radius');
+            
+            &:hover, &.active {
+                @include navbar_underline_border($thickness: 2px);
+            }
+        }
+        
+        &.lang-item {
+            display: none;
+            height: 10px;
+            &:hover {
+                background: none;
+            }
+            img {
+                height: 20px;
+                opacity: 0.9;
+                transition: all 0.5s ease;
+                &:hover {
+                    transform: scale(1.1);
+                    opacity: 1;
+                }
+            }
+        }
+
+    }
+}
+
+button.hamburger {
+    display: none;
+}
+
+.component-scss {
+    .navbar {
+        .logo {
+            .cls-primary {
+                fill: map-get($nav-item, 'inverse-color');;
+            }
+        }
+    }
+
+    ul.menu {
+        
+        li {
+
+            a {
+                color: map-get($nav-item, 'inverse-color');
+                
+                &:hover, &.active {
+                    &:after {
+                        border-bottom-color: map-get($nav-item, 'inverse-color');
+                    }
+                }
+            }
+
+        }
+    }
+}

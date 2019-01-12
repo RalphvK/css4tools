@@ -375,6 +375,12 @@ const hex_rgb = {
             rgb_input: ''
         }
     },
+    beforeCreate: function () {
+        document.body.classList.add('component-hexargba');
+    },
+    destroyed: function () {
+        document.body.classList.remove('component-hexargba');
+    },
     computed: {
         hex: {
             get() {
@@ -471,6 +477,12 @@ const scss = {
             scss: '// SCSS goes here'
         }
     },
+    beforeCreate: function () {
+        document.body.classList.add('component-scss');
+    },
+    destroyed: function () {
+        document.body.classList.remove('component-scss');
+    },
     watch: {
         baseColor: {
             handler(object) {
@@ -551,6 +563,7 @@ const scss = {
         `
 };
 const router = new VueRouter({
+    linkExactActiveClass: 'active',
     routes: [
         {
             path: '/',

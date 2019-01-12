@@ -8,6 +8,12 @@ const scss = {
             scss: '// SCSS goes here'
         }
     },
+    beforeCreate: function () {
+        document.body.classList.add('component-scss');
+    },
+    destroyed: function () {
+        document.body.classList.remove('component-scss');
+    },
     watch: {
         baseColor: {
             handler(object) {

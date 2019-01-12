@@ -1,4 +1,5 @@
 const router = new VueRouter({
+    linkExactActiveClass: 'active',
     routes: [
         {
             path: '/',

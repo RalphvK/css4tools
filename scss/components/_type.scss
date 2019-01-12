@@ -1,0 +1,8 @@
+@mixin display-text() {
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+.display-text {
+    @include display-text();
+}
