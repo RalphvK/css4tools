@@ -1,0 +1,7 @@
+{
+    "includes": [
+        "./js/partials/colorCode.js",
+        "./js/partials/modules/*.js",
+        "./js/partials/**/*.js"
+    ]
+}
