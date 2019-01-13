@@ -22,3 +22,11 @@ function setThemeColor(color) {
     var metaThemeColor = document.querySelector("meta[name=theme-color]");
     metaThemeColor.setAttribute("content", color);
 }
+
+function setBodyInverse(value) {
+    if (value) {
+        document.body.classList.add('inverse');
+    } else {
+        document.body.classList.remove('inverse');
+    }
+}

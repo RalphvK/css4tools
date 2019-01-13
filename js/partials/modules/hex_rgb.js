@@ -49,6 +49,7 @@ const hex_rgb = {
             handler(object) {
                 this.logChannels();
                 this.setBackground('body', this.color.hex());
+                this.checkContrast();
                 setThemeColor(this.color.hex());
             },
             deep: true
@@ -65,6 +66,13 @@ const hex_rgb = {
         },
         logChannels() {
             return { red: this.color.red, green: this.color.green, blue: this.color.blue, alpha: this.color.alpha };
+        },
+        checkContrast() {
+            if (this.color.getHslArray('integer')[2] > 70) {
+                setBodyInverse(true);
+            } else {
+                setBodyInverse(false);
+            }
         }
     },
     mounted() {

@@ -232,6 +232,24 @@ var colorCode = class {
         output += (this.alpha !== undefined) ? ',' + this.alpha + ')' : ')';
         return output;
     }
+    // returns array with HSL values
+    getHslArray(format = 'string') {
+        var hsl = this.rgbToHsl(this.red, this.green, this.blue);
+        if (format == 'string') {
+            var output = hsl;
+        } else if (format == 'integer') {
+            var output = [];
+            hsl.forEach(element => {
+                output.push(parseInt(element));
+            });
+        } else if (format == 'decimal') {
+            var output = [];
+            output[0] = parseInt(hsl[0]) / 360;
+            output[1] = parseInt(hsl[1]) / 100;
+            output[2] = parseInt(hsl[2]) / 100;
+        }
+        return output;
+    }
 
     // number to hex function
     numberToHex(number) {
@@ -416,6 +434,7 @@ const hex_rgb = {
             handler(object) {
                 this.logChannels();
                 this.setBackground('body', this.color.hex());
+                this.checkContrast();
                 setThemeColor(this.color.hex());
             },
             deep: true
@@ -432,6 +451,13 @@ const hex_rgb = {
         },
         logChannels() {
             return { red: this.color.red, green: this.color.green, blue: this.color.blue, alpha: this.color.alpha };
+        },
+        checkContrast() {
+            if (this.color.getHslArray('integer')[2] > 70) {
+                setBodyInverse(true);
+            } else {
+                setBodyInverse(false);
+            }
         }
     },
     mounted() {
@@ -472,10 +498,10 @@ const scss = {
         }
     },
     beforeCreate: function () {
-        document.body.classList.add('inverse');
+        setBodyInverse(true);
     },
     destroyed: function () {
-        document.body.classList.remove('inverse');
+        setBodyInverse(false);
     },
     watch: {
         baseColor: {
@@ -579,4 +605,12 @@ var vm = new Vue({
 function setThemeColor(color) {
     var metaThemeColor = document.querySelector("meta[name=theme-color]");
     metaThemeColor.setAttribute("content", color);
+}
+
+function setBodyInverse(value) {
+    if (value) {
+        document.body.classList.add('inverse');
+    } else {
+        document.body.classList.remove('inverse');
+    }
 }

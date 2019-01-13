@@ -9,10 +9,10 @@ const scss = {
         }
     },
     beforeCreate: function () {
-        document.body.classList.add('inverse');
+        setBodyInverse(true);
     },
     destroyed: function () {
-        document.body.classList.remove('inverse');
+        setBodyInverse(false);
     },
     watch: {
         baseColor: {
