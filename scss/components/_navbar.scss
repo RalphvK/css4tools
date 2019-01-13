@@ -147,3 +147,18 @@ button.hamburger {
         }
     }
 }
+
+@include media-breakpoint-down(sm) {
+
+    .navbar {
+        flex-direction: column;
+        text-align: center;
+
+        ul.menu {
+            padding-left: 0px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    }
+
+}

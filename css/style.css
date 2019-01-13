@@ -6558,6 +6558,14 @@ button.hamburger {
   .inverse ul.menu li a:hover:after, .inverse ul.menu li a.active:after {
     border-bottom-color: #343a40; }
 
+@media (max-width: 767.98px) {
+  .navbar {
+    flex-direction: column;
+    text-align: center; }
+    .navbar ul.menu {
+      padding-left: 0px;
+      margin-left: auto;
+      margin-right: auto; } }
 /*!
  * animate.css -http://daneden.me/animate
  * Version - 3.6.0
