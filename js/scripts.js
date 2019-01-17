@@ -587,13 +587,25 @@ const router = new VueRouter({
     routes: [
         {
             path: '/',
-            component: hex_rgb
+            component: hex_rgb,
+            meta: {
+                'title': 'CSS4 HEXA - RGBA Converter'
+            }
         },
         {
             path: '/relative-hsl',
-            component: scss
+            component: scss,
+            meta: {
+                'title': 'SCSS Relative Color'
+            }
         }
-    ]
+    ],
+});
+
+// change page title
+router.beforeEach((to, from, next) => {
+    document.title = to.meta.title;
+    next();
 });
 
 // Vue app
