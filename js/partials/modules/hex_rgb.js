@@ -18,11 +18,12 @@ const hex_rgb = {
                 }
             },
             set(value) {
-                this.color.hex(value);
+                this.color.parseHex(value);
                 if (!this.hex_active) {
                     this.hex_input = this.color.hex();
                 } else {
                     this.hex_input = value;
+                    this.rgb_input = this.color.rgb();
                 }
             }
         },
@@ -40,6 +41,7 @@ const hex_rgb = {
                     this.rgb_input = this.color.rgb();
                 } else {
                     this.rgb_input = value;
+                    this.hex_input = this.color.hex();
                 }
             }
         }
